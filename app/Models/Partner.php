@@ -49,4 +49,11 @@ class Partner extends Model implements HasMedia
     {
         return $date->format('Y-m-d H:i:s');
     }
+    
+    public function updateBalanceWhenCreatePayment($amount, $id)
+    {
+        $partner = Partner::find($id);
+        $partner->balance = $partner->balance + $amount;
+        $partner->save();
+    }
 }
