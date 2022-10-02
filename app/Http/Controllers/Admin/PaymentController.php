@@ -76,6 +76,7 @@ class PaymentController extends Controller
     public function store(StorePaymentRequest $request)
     {
         $payment = Payment::create($request->all());
+        $updateMainBalance = \App\Models\Partner::updateBalanceWhenCreatePayment($request->amount, $request->partner_id);
 
         return redirect()->route('admin.payments.index');
     }
